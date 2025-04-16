@@ -1,165 +1,144 @@
 import 'package:flutter/material.dart';
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
-  class MyApp extends StatelessWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
-  MySnackBar(message, context)
-  {
-    return ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
-  }
-
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(primarySwatch: Colors.green),
+      color: Colors.blue,
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.indigo,
+      home: HomeActivity(),
+    );
+  }
+}
+
+class HomeActivity extends StatelessWidget {
+  const HomeActivity({super.key});
+MySnackBar(message, context )
+{
+  return ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(message))
+  );
+}
+  @override
+  Widget build(BuildContext context) {
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("My App"),
+        backgroundColor: Colors.green,
+        toolbarHeight: 60,
+        actions: [
+          IconButton(onPressed: (){MySnackBar("I'm Search", context);}, icon: Icon(Icons.search)),
+          IconButton(onPressed: (){MySnackBar("I'm Comment", context);}, icon: Icon(Icons.comment)),
+          IconButton(onPressed: (){MySnackBar("I'm Email", context);}, icon: Icon(Icons.email)),
+          IconButton(onPressed: (){MySnackBar("I'm Setting", context);}, icon: Icon(Icons.settings)),
+
+        ],
       ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text("Login APP"),
-          backgroundColor: Colors.amber,
-          centerTitle: true,
-          toolbarHeight: 60,
-          titleSpacing: 0,
-          toolbarOpacity: 1.0,
-          elevation: 0,
-          actions: [
-            IconButton(onPressed: (){MySnackBar("I'm comment", context);}, icon: Icon(Icons.comment))
-          ],
-        ),
-        floatingActionButton: FloatingActionButton(
-          elevation: 10,
-          backgroundColor: Colors.green,
-          child: Icon(Icons.add),
-          onPressed: ()
+      floatingActionButton: FloatingActionButton(
+        elevation: 10,
+        backgroundColor: Colors.amber,
+        child: Icon(Icons.add),
+        onPressed: (
+        ){
+          MySnackBar("I'm floating Action Button", context);
+        }
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: 2,
+        items: [
+        BottomNavigationBarItem(icon: Icon(Icons.home), label:"Home"),
+        BottomNavigationBarItem(icon: Icon(Icons.message), label:"Contact"),
+        BottomNavigationBarItem(icon: Icon(Icons.person), label:"Profile"),
+
+      ],
+      onTap: (
+      int index
+      ){
+          if(index==0){
+           MySnackBar("I'm home bottom menu", context);
+          }
+          if(index==1)
             {
-              MySnackBar("I'm Floating Action Button", context);
+              MySnackBar("I'm Contact bottom menu", context);
             }
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          currentIndex: 2,
-          items: [
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: "home"),
-            BottomNavigationBarItem(icon: Icon(Icons.message), label: "contact"),
-            BottomNavigationBarItem(icon: Icon(Icons.person), label: "profile")
-          ],
-          onTap: (int index){
-            if(index==0)
-              MySnackBar("I'm home bottom menu", context);
-            if(index==1)
-              MySnackBar("I'm contact bottom menu", context);
-            if(index==2)
+          if(index==2)
+            {
               MySnackBar("I'm profile bottom menu", context);
 
-          }
+            }
+      },),
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            DrawerHeader(
+              padding: EdgeInsets.all(0),
+                child: UserAccountsDrawerHeader(
+            decoration: BoxDecoration(color: Colors.black),
+            accountName: Text("Roman"),
+              accountEmail: Text("romansheikh2000@gmail.com"),
+                  currentAccountPicture: Image.network("https://ia80227.us.archive.or/6/items/github.com-flutter-flutter_-_2022-02-08_11-18-30/cover.jpg"),
+                  onDetailsPressed: (){
+                  MySnackBar("This is profile", context);
+                  },
+                )),
+            ListTile(leading: Icon(Icons.home),
+              title: Text("Home"),
+              onTap: (){
+              MySnackBar("I'm Home", context);
+            },),
+            ListTile(leading: Icon(Icons.person),title: Text("Contact"),onTap: (){
+              MySnackBar("I'm Contact", context);
+            }
+              ,),
+            ListTile(leading: Icon(Icons.email),title: Text("Email"),onTap: (){
+              MySnackBar("I'm email", context);
+            },),
+
+          ],
         ),
-        drawer: Drawer(
-         child: ListView(
-           children: [
-             DrawerHeader(
+      ),
+     endDrawer: Drawer(
+        child: ListView(
+          children: [
+            DrawerHeader(
+                padding: EdgeInsets.all(0),
+                child: UserAccountsDrawerHeader(
+                  decoration: BoxDecoration(color: Colors.black),
+                  accountName: Text("Roman"),
+                  accountEmail: Text("romansheikh2000@gmail.com"),
+                  currentAccountPicture: Image.network("https://ia80227.us.archive.or/6/items/github.com-flutter-flutter_-_2022-02-08_11-18-30/cover.jpg"),
+                  onDetailsPressed: (){
+                    MySnackBar("This is profile", context);
+                  },
+                )),
+            ListTile(leading: Icon(Icons.home),
+              title: Text("Home"),
+              onTap: (){
+                MySnackBar("I'm Home", context);
+              },),
+            ListTile(leading: Icon(Icons.person),title: Text("Contact"),onTap: (){
+              MySnackBar("I'm Contact", context);
+            }
+              ,),
+            ListTile(leading: Icon(Icons.email),title: Text("Email"),onTap: (){
+              MySnackBar("I'm email", context);
+            },),
 
-                 padding: EdgeInsets.all(6),
-
-                 child: UserAccountsDrawerHeader(
-                   decoration:BoxDecoration(color: Colors.green),
-                   accountName: Text("This is Drawer header section"),
-                   accountEmail: Text("roman.200102@s.pust.ac.bd"),
-                   currentAccountPicture:Image.network("") ,
-
-             )
-             ),
-             ListTile(leading: Icon(Icons.home),title: Text("Home"),
-                 onTap: ()
-                 {
-                   MySnackBar("I'm home", context);
-                 }
-             ),
-             ListTile(
-               leading: Icon(Icons.contact_mail),title: Text("Contact"),
-               onTap: ()
-               {
-                 MySnackBar("I'm Contact", context);
-               },
-             ),
-             ListTile(
-                 leading: Icon(Icons.person),title: Text("Profile"),
-                 onTap: ()
-                 {
-                 MySnackBar("I'm Contact", context);
-                },
-              ),
-             ListTile(leading: Icon(Icons.email),title: Text("Email"),
-             onTap: ()
-                 {
-                   MySnackBar("I'm Email", context);
-                 }
-             ),
-             ListTile(
-                 leading: Icon(Icons.phone),title: Text("Phone"),
-             onTap: ()
-               {
-                 MySnackBar("I'm Phone", context);
-               }
-             )
-           ],
-         ),
+          ],
         ),
-        endDrawer: Drawer(
-          child: ListView(
-            children: [
-              DrawerHeader(
+      ),
+      body: Center(
+        child: Text("Hello Flutter Developer"),
+      ),
 
-                  padding: EdgeInsets.all(6),
 
-                  child: UserAccountsDrawerHeader(
-                    decoration:BoxDecoration(color: Colors.green),
-                    accountName: Text("This is Drawer header section"),
-                    accountEmail: Text("roman.200102@s.pust.ac.bd"),
-                    currentAccountPicture:Image.network("") ,
-
-                  )
-              ),
-              ListTile(leading: Icon(Icons.home),title: Text("Home"),
-                  onTap: ()
-                  {
-                    MySnackBar("I'm home", context);
-                  }
-              ),
-              ListTile(
-                leading: Icon(Icons.contact_mail),title: Text("Contact"),
-                onTap: ()
-                {
-                  MySnackBar("I'm Contact", context);
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.person),title: Text("Profile"),
-                onTap: ()
-                {
-                  MySnackBar("I'm Contact", context);
-                },
-              ),
-              ListTile(leading: Icon(Icons.email),title: Text("Email"),
-                  onTap: ()
-                  {
-                    MySnackBar("I'm Email", context);
-                  }
-              ),
-              ListTile(
-                  leading: Icon(Icons.phone),title: Text("Phone"),
-                  onTap: ()
-                  {
-                    MySnackBar("I'm Phone", context);
-                  }
-              )
-            ],
-          ),
-        ),
-     ),
     );
   }
 }
