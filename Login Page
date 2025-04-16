@@ -35,12 +35,12 @@ class MyApp extends StatelessWidget {
             Padding(padding: EdgeInsets.all(20), child: TextField(decoration: InputDecoration(border:OutlineInputBorder(),labelText: 'First Name')),) ,
             Padding(padding: EdgeInsets.all(20), child: TextField(decoration: InputDecoration(border:OutlineInputBorder(),labelText: 'Last Name')),),
             Padding(padding: EdgeInsets.all(20), child: TextField(decoration: InputDecoration(border:OutlineInputBorder(),labelText: 'Email Address')),),
-            Padding(padding: EdgeInsets.all(20), child: ElevatedButton(onPressed: (){}, child:Text('Submit')),)
+            Padding(padding: EdgeInsets.all(20), child: ElevatedButton(onPressed: (){MySnackBar("Logged In", context);}, child:Text('Submit')),)
           ],
 
         ),
 
-     ),
+      ),
     );
   }
 }
